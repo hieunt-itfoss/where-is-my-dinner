@@ -1,0 +1,22 @@
+{
+  "name": "Đặt cơm đi bạn",
+  "description": "I'm Mia's Bot. Mia is lazy. So on behalf of Mia, I'll remind you to order your dinner on time.",
+  "version": "1.0",
+  "manifest_version": 3,
+  "permissions": [
+    "alarms",
+    "notifications",
+    "tabs"
+  ],
+  "background": {
+    "service_worker": "js/background.js"
+  },
+  "action": {
+    "default_title": "Đặt cơm",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "32": "hot-pot-32.png",
+    "128": "hot-pot-128.png"
+  }
+}

@@ -1,0 +1,121 @@
+<!-- Copyright 2017 The Chromium Authors. All rights reserved.
+Use of this source code is governed by a BSD-style license that can be
+found in the LICENSE file. -->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    body {
+      text-align: center;
+      width: 200px;
+      margin: 5px;
+    }
+
+    /* button CSS */
+    .button {
+      font-size: 12px;
+      font-weight: 200;
+      letter-spacing: 1px;
+      padding: 9px 15px 9px;
+      margin: 15px;
+      outline: 0;
+      border: 1px solid black;
+      border-radius: 8px;
+      cursor: pointer;
+      position: relative;
+      background-color: rgba(0, 0, 0, 0);
+      color: #ffffff;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+    }
+
+    .button:after {
+      content: "";
+      border-radius: 8px;
+      background-color: #0be881;
+      width: 100%;
+      z-index: -1;
+      position: absolute;
+      height: 100%;
+      top: 5px;
+      left: 5px;
+      transition: 0.2s;
+    }
+
+    .button:hover:after {
+      top: 0px;
+      left: 0px;
+    }
+
+    @media (min-width: 768px) {
+      .button {
+        padding: 13px 50px 13px;
+      }
+    }
+
+    /* button-quickOpen CSS */
+    .button-24 {
+      background: #ff4757;
+      border: 1px solid #ff4757;
+      border-radius: 6px;
+      box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+      box-sizing: border-box;
+      color: #FFFFFF;
+      cursor: pointer;
+      display: inline-block;
+      /* font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif; */
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 12px;
+      min-height: 40px;
+      outline: 0;
+      padding: 12px 14px;
+      text-align: center;
+      text-rendering: geometricprecision;
+      text-transform: none;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+      /* top: 20px; */
+      vertical-align: middle;
+    }
+
+    .button-24:hover,
+    .button-24:active {
+      background-color: initial;
+      background-position: 0 0;
+      color: #ff4757;
+    }
+
+    .button-24:active {
+      opacity: .5;
+    }
+  </style>
+  <!--
+      - JavaScript and HTML must be in separate files
+     -->
+</head>
+
+<body>
+  <h2>Order Dinner</h2>
+  <!-- Scheduler: Allows user to set the schedule time whenever they want -->
+  <label for="appt">Choose a time for the reminder:</label>
+  <input type="time" id="appt" name="appt" min="09:00" max="14:59" required>
+  <button class="button" id="setTimer">Set schedule time</button>
+  <button class="button-24" id="clearAlarm">Clear Alarm</button>
+  <!-- Still being developed -->
+  <h2>Menu</h2>
+  <p>Feature is being developed</p>
+  <button class="button" role="button" id="quickOpen" value="0.1">Quick Open</button>
+  <script src="js/dinner_app.js"></script>
+  <footer>
+    <p>
+      Cloud -
+      <a href="slack://open">@Data</a>
+    </p>
+  </footer>
+</body>
+
+</html>
