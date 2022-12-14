@@ -46,4 +46,4 @@ function updateScheduleTime() {
 // -------------- EVENT TRIGGER --------------
 document.getElementById("quickOpen").addEventListener("click", openForm);
 document.getElementById("setTimer").addEventListener("click", updateScheduleTime);
-document.getElementById("clearAlarm").addEventListener("click", clearAllAlarms);
+document.getElementById("clearAlarm").addEventListener("click", clearAlarm("dinner"));
