@@ -86,3 +86,10 @@ chrome.notifications.onClicked.addListener(async () => {
   chrome.tabs.create({ url: "http://goo.gl/enElea" });
   chrome.notifications.clear("dinner");
 });
+
+// Handle savedScheduleTime onChanged event
+chrome.storage.onChanged.addListener(() => {
+  chrome.storage.local.get(["savedScheduleTime"]).then((result) => {
+    console.log("ScheduleTime currently is " + result.key);
+  });
+});

@@ -44,17 +44,28 @@ async function updateScheduleTime() {
 
     // Set an alarms trigger on scheduled timestamps
     createAlarm("dinner", scheduleTime, dayInMins);
+    document.getElementById("appt").value = new Date(scheduleTime)
+      .toTimeString()
+      .slice(0, 5);
+
+    document.getElementById("currentTime").innerHTML =
+      "Current Alarm: " + new Date(scheduleTime).toTimeString();
+
+    // Save the scheduleTime to chrome local storage
+    const value = { timeString: scheduleTime };
+
+    chrome.storage.local.set({ savedScheduleTime: value }, () => {
+      if (chrome.runtime.lastError) console.log("Error setting");
+    });
 
     // Update button value to indicate that the alarm has been set
-    scheduleButton.innerText = "Update Success";
-
+    setTimeout(function () {
+      scheduleButton.innerText = "Set Alarm";
+    }, 3000); //delay is in milliseconds
   } catch (e) {
     console.log(e);
   } finally {
-    // Change the button value to default after 2 sec
-    // TODO: Apply dynamic content for button value
-    await delay(2000);
-    scheduleButton.innerText = "Set schedule time";
+    scheduleButton.innerText = "Updated!";
   }
 }
 

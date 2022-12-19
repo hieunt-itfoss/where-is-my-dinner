@@ -3,7 +3,7 @@ Use of this source code is governed by a BSD-style license that can be
 found in the LICENSE file. -->
 <!DOCTYPE html>
 <html>
-
+<script src="./js/popup.js"></script>
 <head>
   <style>
     body {
@@ -103,9 +103,9 @@ found in the LICENSE file. -->
   <!-- Scheduler: Allows user to set the schedule time whenever they want -->
   <label for="appt">Choose a time for the reminder:</label>
   <input type="time" id="appt" name="appt" min="09:00" max="14:59" required>
-  <label id="buttonState" value=""></label>
-  <button class="button" id="setTimer">Set schedule time</button>
-  <button class="button-24" id="clearAlarm">Clear Alarm</button>
+  <p id="currentTime"></p>
+  <button class="button" id="setTimer">Set Alarm</button>
+  <button class="button-24" id="clearAlarm">Clear</button>
   <!-- Still being developed -->
   <h2>Menu</h2>
   <p>Feature is being developed</p>
