@@ -58,7 +58,7 @@ chrome.alarms.onAlarm.addListener(() => {
   } else {
     // Check if current day is weekday
     if (new Date().getDay() % 6 != 0) {
-      console.log("Click state: " + isClick + " | Timestamp: " + new Date());
+      console.log("Click state: " + isClick + " | Timestamp: " + new Date().toTimeString());
 
       if (!isClick) {
         // Force open the Order form if the first notification is ignored by users
@@ -70,7 +70,7 @@ chrome.alarms.onAlarm.addListener(() => {
         chrome.notifications.create("dinner", {
           type: "basic",
           iconUrl: "../hot-pot-128.png",
-          title: "Your dinner incoming...",
+          title: "Đặt cơm đi bạn!",
           message: "Please make your choice\nhttp://goo.gl/enElea",
           buttons: [{ title: "Link" }],
           priority: 0,

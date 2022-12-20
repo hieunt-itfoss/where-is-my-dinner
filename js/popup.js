@@ -1,5 +1,3 @@
-chrome.runtime.sendMessage({ popupOpen: true });
-
 chrome.storage.local.get(["savedScheduleTime"], (result) => {
   if (typeof result.savedScheduleTime !== "undefined") {
     document.getElementById("currentTime").innerHTML =

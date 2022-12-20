@@ -32,40 +32,55 @@ function clearAllAlarms() {
 
 // -------------- SCHEDULER --------------
 async function updateScheduleTime() {
-  // Parse time elements from input-value
-  timeElements = document.getElementById("appt").value.split(":");
+  let timeString = document.getElementById("appt").value;
 
-  try {
-    // Set new time value for reminder
-    scheduleTime = new Date().setHours(timeElements[0], timeElements[1], 0, 0);
+  if (!timeString) {
+    document.getElementById("currentTime").innerHTML = "ERR: Time not set.";
+  } else {
+    // Parse time elements from input-value
+    timeElements = timeString.split(":");
+    console.log(timeElements);
 
-    // Clear the older alarm if it exists
-    clearAlarm("dinner");
+    if (!timeElements.length) {
+    } else {
+      try {
+        // Set new time value for reminder
+        scheduleTime = new Date().setHours(
+          timeElements[0],
+          timeElements[1],
+          0,
+          0
+        );
 
-    // Set an alarms trigger on scheduled timestamps
-    createAlarm("dinner", scheduleTime, dayInMins);
-    document.getElementById("appt").value = new Date(scheduleTime)
-      .toTimeString()
-      .slice(0, 5);
+        // Clear the older alarm if it exists
+        clearAlarm("dinner");
 
-    document.getElementById("currentTime").innerHTML =
-      "Current Alarm: " + new Date(scheduleTime).toTimeString();
+        // Set an alarms trigger on scheduled timestamps
+        createAlarm("dinner", scheduleTime, dayInMins);
+        document.getElementById("appt").value = new Date(scheduleTime)
+          .toTimeString()
+          .slice(0, 5);
 
-    // Save the scheduleTime to chrome local storage
-    const value = { timeString: scheduleTime };
+        document.getElementById("currentTime").innerHTML =
+          "Current Alarm: " + new Date(scheduleTime).toTimeString();
 
-    chrome.storage.local.set({ savedScheduleTime: value }, () => {
-      if (chrome.runtime.lastError) console.log("Error setting");
-    });
+        // Save the scheduleTime to chrome local storage
+        const value = { timeString: scheduleTime };
 
-    // Update button value to indicate that the alarm has been set
-    setTimeout(function () {
-      scheduleButton.innerText = "Set Alarm";
-    }, 3000); //delay is in milliseconds
-  } catch (e) {
-    console.log(e);
-  } finally {
-    scheduleButton.innerText = "Updated!";
+        chrome.storage.local.set({ savedScheduleTime: value }, () => {
+          if (chrome.runtime.lastError) console.log("Error setting");
+        });
+
+        // Update button value to indicate that the alarm has been set
+        setTimeout(function () {
+          scheduleButton.innerText = "Set Alarm";
+        }, 3000); //delay is in milliseconds
+      } catch (e) {
+        console.log(e);
+      } finally {
+        scheduleButton.innerText = "Updated!";
+      }
+    }
   }
 }
 
