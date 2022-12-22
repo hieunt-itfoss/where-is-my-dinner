@@ -29,19 +29,20 @@ function checkResetStateAlarm(callback) {
 
 // Initialize alarm with defaultTimer and newDate at the first time when the extension is installed.
 chrome.runtime.onInstalled.addListener(() => {
-  chrome.alarms.create("lastChanceToOrder", {
-    when: defaultTimer,
-    periodInMinutes: 1440,
-  });
-  chrome.alarms.create("resetState", { when: newDate, periodInMinutes: 1440 });
-
   // Set defaultTimer value to make sure users don't miss the lastChanceToOrder event
   // 5mins before the Ragnarok
-  defaultTimer = new Date().setHours(14, 55, 0, 0);
+  defaultTimer = new Date().setHours(14, 45, 0, 0);
 
   // Set newDate value to reset the click state
   newDate = new Date().setHours(6, 0, 0, 0) + 24 * 60 * 60 * 1000;
 
+  chrome.alarms.create("lastChanceToOrder", {
+    when: defaultTimer,
+    periodInMinutes: 1440,
+  });
+  console.debug("defaultTimer is set: " + new Date(defaultTimer).toTimeString());
+  
+  chrome.alarms.create("resetState", { when: newDate, periodInMinutes: 1440 });
   // Initialize clicking state of user which is used to track user's event click on notification banner.
   isClick = true;
 });
@@ -58,7 +59,9 @@ chrome.alarms.onAlarm.addListener(() => {
   } else {
     // Check if current day is weekday
     if (new Date().getDay() % 6 != 0) {
-      console.log("Click state: " + isClick + " | Timestamp: " + new Date().toTimeString());
+      console.log(
+        "Click state: " + isClick + " | Timestamp: " + new Date().toTimeString()
+      );
 
       if (!isClick) {
         // Force open the Order form if the first notification is ignored by users
