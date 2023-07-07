@@ -1,7 +1,7 @@
 {
   "name": "Đặt cơm đi bạn",
-  "description": "I'm Mia's Bot. Mia is lazy. So on behalf of Mia, I'll remind you to order your dinner on time.",
-  "version": "1.0",
+  "description": "I know you're lazy ass. So on behalf of you, I'll remind you to order your dinner on time. 💪",
+  "version": "1.1",
   "manifest_version": 3,
   "permissions": [
     "alarms",

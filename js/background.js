@@ -5,8 +5,8 @@ let newDate;
 let isClick = true;
 
 function checkResetStateAlarm(callback) {
-  chrome.alarms.getAll(function (alarms) {
-    var hasAlarm = alarms.some(function (a) {
+  chrome.alarms.getAll(function(alarms) {
+    var hasAlarm = alarms.some(function(a) {
       return a.name == "resetState";
     });
 
@@ -30,8 +30,8 @@ function checkResetStateAlarm(callback) {
 // Initialize alarm with defaultTimer and newDate at the first time when the extension is installed.
 chrome.runtime.onInstalled.addListener(() => {
   // Set defaultTimer value to make sure users don't miss the lastChanceToOrder event
-  // 5mins before the Ragnarok
-  defaultTimer = new Date().setHours(14, 45, 0, 0);
+  // 30mins before the Ragnarok
+  defaultTimer = new Date().setHours(14, 0, 0, 0);
 
   // Set newDate value to reset the click state
   newDate = new Date().setHours(6, 0, 0, 0) + 24 * 60 * 60 * 1000;
@@ -41,7 +41,7 @@ chrome.runtime.onInstalled.addListener(() => {
     periodInMinutes: 1440,
   });
   console.debug("defaultTimer is set: " + new Date(defaultTimer).toTimeString());
-  
+
   chrome.alarms.create("resetState", { when: newDate, periodInMinutes: 1440 });
   // Initialize clicking state of user which is used to track user's event click on notification banner.
   isClick = true;
@@ -65,7 +65,7 @@ chrome.alarms.onAlarm.addListener(() => {
 
       if (!isClick) {
         // Force open the Order form if the first notification is ignored by users
-        chrome.tabs.create({ url: "http://goo.gl/enElea" });
+        chrome.tabs.create({ url: global.formURL });
         isClick = true;
       } else {
         // Set notification
@@ -74,7 +74,7 @@ chrome.alarms.onAlarm.addListener(() => {
           type: "basic",
           iconUrl: "../hot-pot-128.png",
           title: "Đặt cơm đi bạn!",
-          message: "Please make your choice\nhttp://goo.gl/enElea",
+          message: "Please make your choice\nhttps://shorturl.at/vIUY1",
           buttons: [{ title: "Link" }],
           priority: 0,
         });

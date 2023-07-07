@@ -10,7 +10,7 @@ let scheduleTime = new Date().setHours(13, 30, 0, 0);
 
 // -------------- FORM --------------
 function openForm() {
-  chrome.tabs.create({ url: "http://goo.gl/enElea" });
+  chrome.tabs.create({ url: global.formURL });
 }
 
 // -------------- ALARM --------------
@@ -72,7 +72,7 @@ async function updateScheduleTime() {
         });
 
         // Update button value to indicate that the alarm has been set
-        setTimeout(function () {
+        setTimeout(function() {
           scheduleButton.innerText = "Set Alarm";
         }, 3000); //delay is in milliseconds
       } catch (e) {
